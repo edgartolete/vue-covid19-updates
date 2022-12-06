@@ -1,9 +1,17 @@
 <template>
   <div class="about">
     <h1> Covid Data</h1>
-    <div id="mapdiv" style="width: 1000px; height: 450px;"></div>
-    <button @click="covidApi.getCountry('Italy')">Test</button>
-    <p>{{ covidApi.filteredObject }}</p>
+    <!-- <div id="mapdiv" style="width: 1000px; height: 450px;"></div> -->
+    <p>New Confirmed: {{ covidApi.global.NewConfirmed }}</p>
+    <p>New Deaths: {{ covidApi.global.NewDeaths }}</p>
+    <p>New Recovered: {{ covidApi.global.NewRecovered }}</p>
+    <p>Total Confirmed: {{ covidApi.global.TotalConfirmed }}</p>
+    <p>Total Deaths: {{ covidApi.global.TotalDeaths }}</p>
+    <p>Total Recovered: {{ covidApi.global.TotalRecovered }}</p>
+
+    <p>Countries: {{ covidApi.countries }}</p>
+    <!-- <button @click="covidApi.getCountry('Italy')">Test</button> -->
+    <!-- <p>{{ covidApi.filteredObject }}</p> -->
   </div>
 </template>
 
@@ -39,7 +47,7 @@ covidApi.getData();
 //     rollOverOutlineColor: "#000000"
 //   }
 // });
-// </script>
+</script>
 <style>
 
 </style>

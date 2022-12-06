@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 export const useCovidApi = defineStore('covidApi', {
     state: () => ({
         countries: [],
+        countryNames: [],
         summary: {},
         global: {},
         result: [],
@@ -27,19 +28,15 @@ export const useCovidApi = defineStore('covidApi', {
                     this.global = this.summary.Global
                     this.countries = this.summary.Countries
                     this.filteredObject = this.countries
+                    this.countryNames = this.countries.map((item)=>{
+                        return item["Country"];
+                    })
+                    console.log(this.countryNames)
 
                     this.filteredObject.forEach(v => {
                         delete v.ID;
-                        delete v.Slug;
-                        delete v.Country;
-                        delete v.NewConfirmed;
-                        delete v.TotalConfirmed;
-                        delete v.NewDeaths;
-                        delete v.TotalDeaths;
-                        delete v.NewRecovered;
-                        delete v.TotalRecovered;
-                        delete v.Date;
-                        delete v.Premium;
+
+                
                         v.id = v.CountryCode;
                         delete v.CountryCode;
                     })
@@ -52,9 +49,10 @@ export const useCovidApi = defineStore('covidApi', {
 //   return array.map(function(item) { return item[key]; });
 // }
             // this.result = this.countries.filter(data => data.Country === country)
-            this.country = this.result
-            this.mapArea = this.country
-            this.mapArea = this.mapArea.map(v => ({...v, "showAsSelected": true}))
+            // this.country = this.result
+            // this.mapArea = this.country
+            // this.mapArea = this.mapArea.map(v => ({...v, "showAsSelected": true}))
+
             // this.mapArea.reduce()
         }
     },
