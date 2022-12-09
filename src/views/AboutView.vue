@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1> Covid Data</h1>
-    <!-- <div id="mapdiv" style="width: 1000px; height: 450px;"></div> -->
+    <div id="mapdiv" style="width: 1000px; height: 450px;"></div>
     <p>New Confirmed: {{ covidApi.global.NewConfirmed }}</p>
     <p>New Deaths: {{ covidApi.global.NewDeaths }}</p>
     <p>New Recovered: {{ covidApi.global.NewRecovered }}</p>
@@ -9,7 +9,8 @@
     <p>Total Deaths: {{ covidApi.global.TotalDeaths }}</p>
     <p>Total Recovered: {{ covidApi.global.TotalRecovered }}</p>
 
-    <p>Countries: {{ covidApi.countries }}</p>
+    <p>Countries: {{ covidApi.filteredObject }}</p>
+
     <!-- <button @click="covidApi.getCountry('Italy')">Test</button> -->
     <!-- <p>{{ covidApi.filteredObject }}</p> -->
   </div>
