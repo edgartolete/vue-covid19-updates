@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { useCovidApi } from '../stores/generalStates'
+import { useCovidApi } from '../stores/covidStates'
 let covidApi = useCovidApi();
 covidApi.getData();
 
