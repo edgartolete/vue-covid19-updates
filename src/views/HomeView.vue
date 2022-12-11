@@ -1,8 +1,19 @@
 
 
 <template>
-<div class="container">
-  <h1>Covid-19 Update as of {{ dateToday }}</h1>
+<div class="container pt-6">
+  <h1>Covid-19 Update as of {{ getDateToday() }}</h1>
+  <div class="flex justify-end">
+  <select @change="selectionChange($event)">
+    <option
+    :key="x"
+    v-for="x in covidApi.countryNames"
+    :value="x"
+> {{ x }}</option>
+  </select>
+  </div>
+
+  <h2>{{ showCountryAsTitle }}</h2>
   <div class="stats">
     <div class="stat">
       <p>New Confirmed:</p>
@@ -29,28 +40,41 @@
       <span>{{ covidApi.totalRecovered }}</span>
     </div>
   </div>
-  <input v-model="covidApi.findCountry" type="text" />
-  <button @click="covidApi.findCountryDetails(covidApi.findCountry)">Find</button>
-  <p> {{ covidApi.result }}</p>
-
+<MapViewVue></MapViewVue>
 </div>
 
-  <!-- <p>Countries: {{ covidApi.global }}</p> -->
 </template>
 
 <script setup>
-import { useCovidApi } from "../stores/covidStates";
+import { useCovidApi } from "../stores/covidStates"
+import MapViewVue from "./MapView.vue";
+import { ref } from "vue";
+import { computed } from "vue";
 let covidApi = useCovidApi();
-covidApi.getData();
+covidApi.getData()
 
-let dateToday = new Date()
-let currentMonth = dateToday.getMonth()
-var months = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"];
 
-currentMonth = months[currentMonth];
+function selectionChange(event){
+  let selected = event.target.options[event.target.options.selectedIndex].text
+  covidApi.findCountryDetails(selected)
+  covidApi.selectedCountry = selected
+}
 
-dateToday = currentMonth + " " + dateToday.getFullYear()
+
+const showCountryAsTitle = computed(() => {
+  return (covidApi.selectedCountry === "--Select Country--") ? "Global" : covidApi.selectedCountry
+})
+
+
+//Get Current Month and Year
+function getDateToday(){
+  let dateToday = new Date()
+  let currentMonth = dateToday.getMonth()
+  let months = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+  currentMonth = months[currentMonth];
+  return dateToday = currentMonth + " " + dateToday.getFullYear()
+}
 
 </script>
 
