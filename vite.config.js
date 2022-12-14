@@ -5,10 +5,11 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/vue-covid19-updates',
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./vue-covid19-updates/src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   }
 })
