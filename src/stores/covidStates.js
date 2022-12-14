@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { compileScript } from 'vue/compiler-sfc'
 
 export const useCovidApi = defineStore('covidApi', {
     state: () => ({
@@ -32,9 +33,28 @@ export const useCovidApi = defineStore('covidApi', {
                 this.countryNames = this.countries.map((item) => {
                     return item["Country"];
                 })
+                
+                let temp = []
+               
+                this.countries.forEach((obj) =>{
+                    temp = Object.entries(obj);
+                    temp = temp.filter(([key, value]) => key == 'CountryCode');
+                    temp = Object.fromEntries(temp);
+                    this.mapSelected.push(temp)
+                })    
 
                 
+                this.mapSelected.forEach(v => {
+
+                    v.id = v.CountryCode; 
+                    delete v.CountryCode;
+                })
+                
+                this.mapSelected = this.mapSelected.map(v => ({...v, "showAsSelected": false}))
+                 
+                
                 this.countryNames.unshift("--Select Country--");
+
             }
             catch(err){
                 console.log(err)
@@ -65,10 +85,21 @@ export const useCovidApi = defineStore('covidApi', {
                 console.log('country not found')
             }
 
+        },
+        changeShowSelect(countryName){
+            let resultObj = []
+            resultObj = this.countries.filter(obj => obj.Country === countryName)[0]
+
+            this.mapSelected.forEach(obj =>{
+                obj.showAsSelected = (obj.id === resultObj.CountryCode) ? true : false;
+            })           
         }       
         
     },
     getters: {
+        getMapSelection(){
+            return this.mapSelected
+        }
 
 
     }

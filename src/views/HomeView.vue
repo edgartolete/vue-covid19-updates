@@ -40,7 +40,6 @@
       <span>{{ covidApi.totalRecovered }}</span>
     </div>
   </div>
-<MapViewVue></MapViewVue>
 </div>
 
 </template>
@@ -58,6 +57,7 @@ function selectionChange(event){
   let selected = event.target.options[event.target.options.selectedIndex].text
   covidApi.findCountryDetails(selected)
   covidApi.selectedCountry = selected
+  covidApi.changeShowSelect(selected)
 }
 
 
@@ -91,6 +91,11 @@ function getDateToday(){
     gap: 1rem;
     margin: auto;
     text-align: right;
+  }
+  @media(max-width: 467px){
+    .stats{
+      grid-template-columns: 1fr 1fr;
+    }
   }
   .stats .stat {
     border: 1px solid black;

@@ -6,49 +6,50 @@
     <a href="https://www.amcharts.com/visited_countries/" style="color: #B4B4B7;">Create your own visited countries
         map</a> or check out the <a href="https://www.amcharts.com/" style="color: #B4B4B7;">JavaScript Charts</a>.
 </div>
-
+{{ showMap() }}
 </template>
 
 <script setup>
 
-var map = AmCharts.makeChart("mapdiv", {
-    type: "map",
-    theme: "dark",
-    projection: "mercator",
-    panEventsEnabled: true,
-    backgroundColor: "#535364",
-    backgroundAlpha: 1,
-    zoomControl: {
-        zoomControlEnabled: true
-    },
-    dataProvider: {
-        map: "worldHigh",
-        getAreasFromMap: true,
-        areas:
-            [
-                {
-                    "id": "PH",
-                    "showAsSelected": true
-                },
-                {
-                    "id": "AL",
-                    "showAsSelected": true
-                }, {
-                    "id": "CN",
-                    "showAsSelected": true
-                }
-            ]
-    },
-    areasSettings: {
-        autoZoom: true,
-        color: "#B4B4B7",
-        colorSolid: "#84ADE9",
-        selectedColor: "#84ADE9",
-        outlineColor: "#666666",
-        rollOverColor: "#9EC2F7",
-        rollOverOutlineColor: "#000000"
+import { useCovidApi } from '../stores/covidStates';
+let covidApi = useCovidApi();
+
+let initialMap = []
+console.log(initialMap)
+setTimeout(() =>{
+    initialMap = [{ "id": "PH", "showAsSelected": true }]
+    console.log(initialMap)
+}, 5000)
+
+
+function showMap(){
+        var map = AmCharts.makeChart("mapdiv", {
+            type: "map",
+            theme: "dark",
+            projection: "mercator",
+            panEventsEnabled: true,
+            backgroundColor: "#535364",
+            backgroundAlpha: 1,
+            zoomControl: {
+                zoomControlEnabled: false
+            },
+            dataProvider: {
+                map: "worldHigh",
+                getAreasFromMap: true,
+                areas: this.initialMap
+            },
+            areasSettings: {
+                autoZoom: false,
+                color: "#B4B4B7",
+                colorSolid: "#84ADE9",
+                selectedColor: "#84ADE9",
+                outlineColor: "#666666",
+                rollOverColor: "#9EC2F7",
+                rollOverOutlineColor: "#000000"
+            }
+        });
     }
-});
+
 
 </script>
 
