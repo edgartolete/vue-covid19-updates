@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./vue-covid19-updates/src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   }
 })
