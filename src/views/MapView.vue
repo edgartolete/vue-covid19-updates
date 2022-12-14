@@ -27,11 +27,14 @@ var map = AmCharts.makeChart("mapdiv", {
         areas:
             [
                 {
-                    "id": "QA",
+                    "id": "PH",
                     "showAsSelected": true
                 },
                 {
-                    "id": "MP",
+                    "id": "AL",
+                    "showAsSelected": true
+                }, {
+                    "id": "CN",
                     "showAsSelected": true
                 }
             ]
