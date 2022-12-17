@@ -62,7 +62,7 @@ export const useCovidApi = defineStore('covidApi', {
             }
         },
         async findCountryDetails(country){
-            let response = await fetch('src/summary.json')
+            let response = await fetch('https://api.covid19api.com/summary')
             let data = await response.json()
             let result = await data.Countries.filter(obj => obj.Country === country)
             if(country === "--Select Country--"){
