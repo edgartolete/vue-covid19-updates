@@ -18,7 +18,8 @@ export const useCovidApi = defineStore('covidApi', {
     actions: {    
         async getData() {
             try{
-                let response = await fetch('src/summary.json')
+                // let response = await fetch('src/summary.json')
+                let response = await fetch('https://api.covid19api.com/summary')
                 let data = await response.json()
                 this.global = await data.Global
                 this.countries = await data.Countries;
