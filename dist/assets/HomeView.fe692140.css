@@ -1,0 +1,1 @@
+.container{max-width:800px;margin:auto}.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:auto;text-align:right}@media (max-width: 467px){.stats{grid-template-columns:1fr 1fr}}.stats .stat{border:1px solid black;padding:10px}.stats .stat p{padding:0;margin:0}.stats .stat span{font-size:2rem}
